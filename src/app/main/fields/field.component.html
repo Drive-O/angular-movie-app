@@ -1,0 +1,9 @@
+<div class="container field">
+  <div class="row" *ngFor='let movie of movies'> <!--Each row-->
+      <app-fieldItem  [original_title]='movie.original_title'
+                      [vote_average]='movie.vote_average'
+                      [poster_path]='movie.poster_path'
+                      [overview]='movie.overview'
+                      [release_date]='movie.release_date'></app-fieldItem>
+  </div>
+</div>

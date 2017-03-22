@@ -4,23 +4,29 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { NavbarComponent } from './header/navbar/navbar.component';
-import { ContentComponent } from './content/content.component';
+import { NavbarComponent } from './navbar/navbar.component';
+
+//Barrel
+import { MainComponent, FieldComponent, FieldItemComponent } from './main';
+
+//providers
+import { MovieService } from './movie.service';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     NavbarComponent,
-    ContentComponent
+    MainComponent,
+    FieldComponent,
+    FieldItemComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [ MovieService ],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }
