@@ -1,52 +1,36 @@
 import { Injectable } from '@angular/core';
 import { IMovieData } from './IMovieData';
+import { Http, Response } from '@angular/http';
+import {Observable} from 'rxjs/Observable'
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class MovieService{
-
+  movies: IMovieData[] = [];
+  pages: number;
+  page: number = 1;
   apiKey: string = '579680975c0a476a8906708b0cc45739';
+  url: string = `https://api.themoviedb.org/3/movie/popular?api_key=579680975c0a476a8906708b0cc45739&language=en-US&page=${this.page}`;
 
-  getMovie(): IMovieData[] {
-    return [
-          {
-            "poster_path": "/45Y1G5FEgttPAwjTYic6czC9xCn.jpg",
-            "adult": false,
-            "overview": "In the near future, a weary Logan cares for an ailing Professor X in a hide out on the Mexican border. But Logan's attempts to hide from the world and his legacy are up-ended when a young mutant arrives, being pursued by dark forces.",
-            "release_date": "2017-02-28",
-            "genre_ids": [
-              28,
-              18,
-              878
-            ],
-            "id": 263115,
-            "original_title": "Logan",
-            "original_language": "en",
-            "title": "Logan",
-            "backdrop_path": "/5pAGnkFYSsFJ99ZxDIYnhQbQFXs.jpg",
-            "popularity": 131.985386,
-            "vote_count": 1615,
-            "video": false,
-            "vote_average": 7.7
-          },
-          {
-            "poster_path": "/z09QAf8WbZncbitewNk6lKYMZsh.jpg",
-            "adult": false,
-            "overview": "Dory is reunited with her friends Nemo and Marlin in the search for answers about her past. What can she remember? Who are her parents? And where did she learn to speak Whale?",
-            "release_date": "2016-06-16",
-            "genre_ids": [
-              16,
-              10751
-            ],
-            "id": 127380,
-            "original_title": "Finding Dory",
-            "original_language": "en",
-            "title": "Finding Dory",
-            "backdrop_path": "/iWRKYHTFlsrxQtfQqFOQyceL83P.jpg",
-            "popularity": 95.451413,
-            "vote_count": 2731,
-            "video": false,
-            "vote_average": 6.7
-          }
-        ]
-    }
+  constructor(private _http: Http){
+  }
+  getMovie(): Observable<IMovieData[]> {
+    this.url = `https://api.themoviedb.org/3/movie/popular?api_key=579680975c0a476a8906708b0cc45739&language=en-US&page=${this.page}`;
+    return this._http.get(this.url)
+    .map((response: Response) => <IMovieData[]>response.json())
+    .do(data => console.log('All ' + JSON.stringify(data)))
+    .catch(this.handleError);
+  }
+  setPage(page){
+    this.page = page; //page has to reload and url assigned newly
+    this.getMovie();
+    console.log("test" + this.page);
+    console.log(this.url);
+  }
+  private handleError(error: Response){
+    console.error(error);
+    return Observable.throw(error.json().error || 'Server Error');
+  }
 }

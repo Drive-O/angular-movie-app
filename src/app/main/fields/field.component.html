@@ -6,4 +6,11 @@
                       [overview]='movie.overview'
                       [release_date]='movie.release_date'></app-fieldItem>
   </div>
+  <div class="container">
+    <div class="change_p">
+      <input type="text" placeholder="1-{{total_p}}" [(ngModel)]="value">
+      <button type="button" class="btn btn-default btn-sm" (click)='setPage(value)'>Go!</button>
+      <div class="alert alert-danger" role="alert" *ngIf='showErrorHTML'>{{errorMessage}}</div>
+    </div>
+  </div>
 </div>
