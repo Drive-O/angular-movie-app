@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
 //Barrel
-import { MainComponent, PopComponent, NowComponent } from './main';
+import { MainComponent, PopComponent, NowComponent, UpcomingComponent } from './main';
 
 //providers
 import { MoviesService } from './services/movies.service';
@@ -20,7 +20,8 @@ import { MoviesService } from './services/movies.service';
     NavbarComponent,
     MainComponent,
     PopComponent,
-    NowComponent
+    NowComponent,
+    UpcomingComponent
   ],
   imports: [
     BrowserModule,
@@ -29,6 +30,7 @@ import { MoviesService } from './services/movies.service';
     RouterModule.forRoot([
       {path: 'popular', component: PopComponent},
       {path: 'right_now', component: NowComponent},
+      {path: 'upcoming', component: UpcomingComponent},
       {path: '', redirectTo: 'popular', pathMatch: 'full'},
       {path: '**', redirectTo: 'popular', pathMatch: 'full'}
     ])
