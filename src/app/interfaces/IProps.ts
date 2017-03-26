@@ -1,4 +1,4 @@
-export interface IMovieData{
+export interface IProps{
   page: number;
   results: [
     {
@@ -18,6 +18,10 @@ export interface IMovieData{
       vote_average: number;
     }
   ];
+  dates?: {
+    maximum: string;
+    minimum: string;
+  };
   total_results: number;
   total_pages: number;
 }

@@ -2,15 +2,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
 //Barrel
-import { MainComponent, FieldComponent, FieldItemComponent } from './main';
+import { MainComponent, PopComponent, NowComponent } from './main';
 
 //providers
-import { MovieService } from './movie.service';
+import { MoviesService } from './services/movies.service';
 
 
 @NgModule({
@@ -18,15 +19,21 @@ import { MovieService } from './movie.service';
     AppComponent,
     NavbarComponent,
     MainComponent,
-    FieldComponent,
-    FieldItemComponent
+    PopComponent,
+    NowComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    RouterModule.forRoot([
+      {path: 'popular', component: PopComponent},
+      {path: 'right_now', component: NowComponent},
+      {path: '', redirectTo: 'popular', pathMatch: 'full'},
+      {path: '**', redirectTo: 'popular', pathMatch: 'full'}
+    ])
   ],
-  providers: [ MovieService ],
+  providers: [ MoviesService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

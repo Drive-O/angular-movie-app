@@ -1,0 +1,18 @@
+<div class="options">
+  <button type="button" class="btn btn-default btn-sm" (click)="previousPage()">Back</button>
+  <button type="button" class="btn btn-default btn-sm" (click)="nextPage()">Continue</button>
+  <span class="pages">{{current_p}} of {{total_p}}</span>
+</div>
+<div class="container" style="margin-top: 5%">
+  <div class="row">
+    <div class="col-md-4" *ngFor='let prop of props'>
+      <div class="box">
+        <span class="poster"><img src="https://image.tmdb.org/t/p/w185/{{prop.poster_path}}"></span>
+        <div class="right">
+          <a><span class="title">{{prop.original_title}}</span></a>
+          <span class="overview">{{prop.overview}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
